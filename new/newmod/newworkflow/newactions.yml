@@ -1,6 +1,9 @@
 name: newmodactions-new
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'newmod/**'
 
 jobs:
   build:
