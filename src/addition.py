@@ -1,5 +1,6 @@
 # app.py
 # This is a test commit
+# Commit from development team side
 def add(a, b):
     return a + b
 
