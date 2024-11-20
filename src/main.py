@@ -31,6 +31,10 @@ class TestExpressionEvaluation(unittest.TestCase):
     def test_unbalanced_parentheses(self):
         expression = "(3 + 4) * 2"
         assert evaluate_expression(expression) == 14
+    
+    def new_test_case(self):
+        expression = "5+5+5-15"
+        assert evaluate_expression(expression) == 0
 
 # Rename the file to something else (e.g., expression_evaluator.py)
 if __name__ == '__main__':
