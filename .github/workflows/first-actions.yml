@@ -1,4 +1,4 @@
-name: My First GitHub Actions
+name: My First GitHub Actions_soni
 
 on: [workflow_dispatch,push]
 
