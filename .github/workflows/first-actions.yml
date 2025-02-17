@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     strategy:
       matrix:
@@ -26,3 +26,4 @@ jobs:
       run: |
         cd src
         python -m pytest addition.py
+        python -m pytest Sub.py
