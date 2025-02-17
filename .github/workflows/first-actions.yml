@@ -2,9 +2,9 @@ name: My First GitHub Actions
 
 on:
   push:
-    branches: [ main ]
+    branches: ['*']  # Trigger on any branch
   pull_request:
-    branches: [ main ]
+    branches: ['*']  # Trigger on pull requests to any branch
 
 jobs:
   build:
