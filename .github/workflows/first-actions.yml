@@ -4,11 +4,11 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-hosted
+    runs-on: ubuntu-host
 
     strategy:
       matrix:
-        python-version: [3.8, 3.9]
+        python-version: [3.8, 3.9 ,2.8]
 
     steps:
     - uses: actions/checkout@v3
