@@ -1,6 +1,13 @@
 name: My First GitHub Actions
 
-on: [push]
+on: 
+  push: 
+    branches:
+      - stage
+  pull_request: 
+    branches: 
+      - main
+    
 
 jobs:
   build:
