@@ -3,7 +3,11 @@ name: My First GitHub Actions
 on: 
   push: 
     branches:
-      - main 
+      - stage
+  pull_request: 
+    branches: 
+      - main
+    
 
 jobs:
   build:
