@@ -1,0 +1,18 @@
+import java.io.*;
+
+public class FileExample {
+    public static void main(String[] args) throws IOException {
+        // Write to a file
+        FileWriter writer = new FileWriter("output.txt");
+        writer.write("Hello, Java File!");
+        writer.close();
+
+        // Read from a file
+        BufferedReader reader = new BufferedReader(new FileReader("output.txt"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        reader.close();
+    }
+}
