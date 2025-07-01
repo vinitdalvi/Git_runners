@@ -1,0 +1,52 @@
+import json
+import hashlib
+import base64
+import requests
+the naame is king 
+# PhonePe API Details
+merchant_id = "YOUR_MERCHANT_ID"
+salt_key = "YOUR_SALT_KEY"
+salt_index = "YOUR_SALT_INDEX"
+phonepe_endpoint = "https://api-preprod.phonepe.com/apis/hermes/pg/v1/pay"
+
+# Transaction Details
+payload = {
+    "merchantId": merchant_id,
+    "merchantTransactionId": "TID" + "123456789",
+    "merchantUserId": "user123",
+    "amount": 10000,  # Amount in paise (10000 = ₹100)
+    "redirectUrl": "https://yourdomain.com/redirect",
+    "redirectMode": "POST",
+    "callbackUrl": "https://yourdomain.com/callback",
+    "paymentInstrument": {
+        "type": "PAY_PAGE"
+    }
+}
+
+# Encode Payload
+payload_str = json.dumps(payload, separators=(',', ':'))
+encoded_payload = base64.b64encode(payload_str.encode()).decode()
+
+# Generate X-VERIFY Header
+string_to_hash = f"{encoded_payload}/pg/v1/pay{salt_key}"
+x_verify = hashlib.sha256(string_to_hash.encode()).hexdigest() + "###" + salt_index
+
+# Prepare Headers
+headers = {
+    "Content-Type": "application/json",
+    "X-VERIFY": x_verify,
+    "X-MERCHANT-ID": merchant_id
+}
+
+# Final Request Body
+request_body = {
+    "request": encoded_payload
+}
+
+# Make the API Call
+response = requests.post(phonepe_endpoint, headers=headers, json=request_body)
+
+# Show Response
+print("Response Status:", response.status_code)
+print("Response Body:", response.json())
+
