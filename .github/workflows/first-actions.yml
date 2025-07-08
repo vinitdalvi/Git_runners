@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-host
+    runs-on: self-hosted
 
     strategy:
       matrix:
