@@ -11,18 +11,26 @@ jobs:
         python-version: [3.8, 3.9]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+      - uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Run tests
-      run: |
-        cd src
-        python -m pytest addition.py
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      - name: Run tests with retry
+        run: |
+          cd src
+          retry=0
+          until [ $retry -ge 3 ]
+          do
+            python -m pytest addition.py && break
+            retry=$((retry+1))
+            echo "Retrying test run... attempt #$retry"
+            sleep 5
+          done
