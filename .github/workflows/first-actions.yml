@@ -8,12 +8,13 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: [3.8]  # Only 3.8, since your self-hosted runner supports it
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
@@ -23,7 +24,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
 
-      - name: Run tests with retry
+      - name: Run tests with retry logic
         run: |
           cd src
           retry=0
@@ -34,4 +35,10 @@ jobs:
             echo "Retrying test run... attempt #$retry"
             sleep 5
           done
+
+          if [ $retry -ge 3 ]; then
+            echo "❌ Tests failed after 3 attempts"
+            exit 1
+          fi
+
 
