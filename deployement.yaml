@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-eks-app
+  name: simple-python-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: flask-eks-app
+      app: python-app
   template:
     metadata:
       labels:
-        app: flask-eks-app
+        app: python-app
     spec:
       containers:
-        - name: flask-app
-          image: <your-ecr-repo-uri>:latest
+        - name: pythonapp
+          image: 273354631576.dkr.ecr.us-east-1.amazonaws.com/my-python-app:latest
           ports:
             - containerPort: 5000
