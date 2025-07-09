@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8, 3.9]
+        python-version: [3.7, 3.8]
 
     steps:
       - uses: actions/checkout@v3
@@ -29,8 +29,9 @@ jobs:
           retry=0
           until [ $retry -ge 3 ]
           do
-            python -m pytest addition.py && break
+            python -m pytest test_addition.py && break
             retry=$((retry+1))
             echo "Retrying test run... attempt #$retry"
             sleep 5
           done
+
