@@ -1,0 +1,8 @@
+resource "aws_s3_bucket" "my-bucket" {
+  bucket = "git-hub-actions"
+
+  tags = {
+    Name        = "nani-parthu-nan"
+    Environment = "wipro-dev-runner"
+  }
+}
