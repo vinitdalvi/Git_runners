@@ -1,0 +1,16 @@
+import json
+import hashlib
+import base64
+import requests
+
+# PhonePe API Details
+merchant_id = "YOUR_MERCHANT_ID"
+salt_key = "YOUR_SALT_KEY"
+salt_index = "YOUR_SALT_INDEX"
+phonepe_endpoint = "https://api-preprod.phonepe.com/apis/hermes/pg/v1/pay"
+
+# Transaction Details
+payload = {
+    "merchantId": merchant_id,
+    "merchantTransact
+
